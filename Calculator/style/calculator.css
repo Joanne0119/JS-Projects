@@ -20,6 +20,7 @@ body {
   height: 500px;
   border-radius: 10px;
   box-shadow: inset 0px 0px 15px rgba(0,0,0, 0.7);
+  position: relative;
 }
 
 .top-panle {
@@ -31,10 +32,11 @@ body {
   color: #fff;
   padding: 20px 24px;
   box-sizing: border-box;
-  font-size: 38px;
+  font-size: 36px;
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
+  overflow: hidden;
 }
 
 .keybord-section {
@@ -86,3 +88,18 @@ body {
 
 }
 
+.record {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 40px;
+  width: 80%;
+  margin: 38px;
+  /* border: solid 1px black; */
+  color: #999;
+  font-size: 30px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  overflow: hidden;
+}
