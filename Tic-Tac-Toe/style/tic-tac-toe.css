@@ -43,7 +43,7 @@ body {
   top: 5%;
   right: 40%;
   border-radius: 10px;
-  animation: show 0.8s ease-out 0s 1;
+  animation: showX 0.8s ease-out 0s 1;
 }
 
 .x::after {
@@ -58,11 +58,11 @@ body {
   top: 5%;
   right: 40%;
   border-radius: 10px;
-  animation: show 0.8s ease-out 0s 1;
+  animation: showX 0.8s ease-out 0s 1;
 }
 
 
-@keyframes show {
+@keyframes showX {
   0%{
     width: 5px;
     height: 40px;
@@ -75,18 +75,28 @@ body {
     top: 5%;
     right: 40%;
   }
-  55%{
-    width: 22px;
-    height: 155px;
-    top: 4%;
-    right: 38%;
-  }
-  60%
-  {
+}
+
+.o {
+  width: 86px;
+  height: 86px;
+  border: solid 18px #fff;
+  z-index: 101;
+  position: absolute;
+  top: 10%;
+  right: 5%;
+  border-radius: 100%;
+  animation: showO 0.8s ease-out 0s 1;
+}
+
+@keyframes showO {
+  0% {
     width: 20px;
-    height: 150px;
-    top: 5%;
-    right: 40%;
+    height: 20px;
+  }
+  50% {
+    width: 86px;
+    height: 86px;
   }
 }
 
