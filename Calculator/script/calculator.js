@@ -133,6 +133,7 @@ function equation()
   showOnTopPanle();
   console.log(calculation);
   newCalculationArrary = [];
+  calculation = [];
 }
 
 function showNewCalculationArrary()
