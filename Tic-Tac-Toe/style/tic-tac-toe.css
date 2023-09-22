@@ -122,3 +122,11 @@ body {
   position: absolute;
   bottom: -80px;
 }
+
+.game-over {
+  opacity: 0.7;
+}
+
+.win {
+  opacity: 1;
+}
