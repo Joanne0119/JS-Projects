@@ -19,7 +19,7 @@ body {
 
 .square {
   display: inline-block;
-  border: solid 10px #eee;
+  border: solid 10px #eaeaea;
   width: 150px;
   height: 150px;
   margin: -4px;

@@ -17,13 +17,12 @@ let changing = 'o';
 
  squares.forEach((square, index) => {
   square.addEventListener('click', () => {
-    let raiseTheFlag = square.dataset.flag;
-    if(raiseTheFlag === 'available')
+    if(square.dataset.flag === 'available')
     {
       const divElement = document.createElement('div');
       divElement.classList.add(changing);
       square.appendChild(divElement);
-      raiseTheFlag = 'unavailable';
+      square.dataset.flag = 'unavailable';
       tieCase++;
       console.log();
       if(changing === 'o') {
@@ -56,7 +55,8 @@ function restart()
  function checkWinner()
  {
   for(let i = 0; i < 3; i++){
-    console.log(i);
+    console.log(`oxArray's index(i) = ${i}`);
+    console.log(oxArray);
     if(oxArray[i][0] === oxArray[i][1] && oxArray[i][1] === oxArray[i][2])
     {
       const winner = oxArray[i][0];
@@ -96,37 +96,76 @@ function restart()
     scoreMessage('tie');
     stop();
   }
+  console.log(`tiecase = ${tieCase}`);
  }
 
  function winnerMessage(direction, i) //direction = r(row), c(col), o(oblique)
  {
+  console.log(`winning direction is ${direction}`);
   if(direction === 'r')
   {
-    let j = 0;
+    // let j = 0;
     squares.forEach((square, index) => {
-      if(index === i*3+j && j < 3)
+      // if((index === i*3+j) && (j < 3))
+      // {
+      //   console.log(`index is = ${index}`);
+      //   square.classList.add('win');
+      //   j++;
+      // }
+      // else {
+      //   j = 0;
+      // }
+      if(i === 0)
       {
-        console.log(index);
-        square.classList.add('win');
-        j++;
+        squares[0].classList.add('win');
+        squares[1].classList.add('win');
+        squares[2].classList.add('win');
       }
-      else {
-        j = 0;
+      else if(i === 1)
+      {
+        squares[3].classList.add('win');
+        squares[4].classList.add('win');
+        squares[5].classList.add('win');
+      }
+      else if(i === 2)
+      {
+        squares[6].classList.add('win');
+        squares[7].classList.add('win');
+        squares[8].classList.add('win');
       }
     })
   }
   else if(direction === 'c')
   {
-    let j = 0;
+    // let j = 0;
     squares.forEach((square, index) => {
-      if(index === i+j && j <= 6)
+      // if((index === i+j) && (j <= 6))
+      // {
+      //   console.log(index);
+      //   square.classList.add('win');
+      //   j += 3;
+      // }
+      // else {
+      //   j = 0;
+      // }
+
+      if(i === 0)
       {
-        console.log(index);
-        square.classList.add('win');
-        j += 3;
+        squares[0].firstChild.classList.add('win');
+        squares[3].firstChild.classList.add('win');
+        squares[6].firstChild.classList.add('win');
       }
-      else {
-        j = 0;
+      else if(i === 1)
+      {
+        squares[1].firstChild.classList.add('win');
+        squares[4].firstChild.classList.add('win');
+        squares[7].firstChild.classList.add('win');
+      }
+      else if(i === 2)
+      {
+        squares[2].firstChild.classList.add('win');
+        squares[5].firstChild.classList.add('win');
+        squares[8].firstChild.classList.add('win');
       }
     })
   }
@@ -135,15 +174,15 @@ function restart()
     squares.forEach((square, index) => {
       if(i === 0)
       {
-        squares[0].classList.add('win');
-        squares[4].classList.add('win');
-        squares[8].classList.add('win');
+        squares[0].firstChild.classList.add('win');
+        squares[4].firstChild.classList.add('win');
+        squares[8].firstChild.classList.add('win');
       }
       else if(i === 2)
       {
-        squares[2].classList.add('win');
-        squares[4].classList.add('win');
-        squares[6].classList.add('win');
+        squares[2].firstChild.classList.add('win');
+        squares[4].firstChild.classList.add('win');
+        squares[6].firstChild.classList.add('win');
       }
      })
   }
@@ -168,20 +207,62 @@ function restart()
   }
  }
 
+let gameOver = false;
  function stop()
  {
   squares.forEach((square) => {
     square.dataset.flag = 'unavailable';
-    square.classList.add('game-over');
+    if(square.childNodes.length > 0)
+    {
+      square.firstChild.classList.add('game-over');
+    }
   });
+  gameOver = true;
+  console.log(gameOver);
  }
+ 
 
  function replay()
  {
-  document.body.addEventListener('click', () => {
-    squares.forEach((square) => {
-      square.dataset.flag = 'available';
-      square.classList.remove('game-over');
-    });
+  squares.forEach((square, index) => {
+    console.log(square.childNodes);
+    if(square.childNodes.length > 0)
+    {
+      square.removeChild(square.firstChild);
+    }
+    
+    oxArray = [ //reset
+      ['00','01','02'],
+      ['10','11','12'],
+      ['20','21','22']
+    ];
+    square.dataset.flag = 'available';
+    // square.firstChild.classList.remove('game-over');
+    tieCase = 0;
+    gameOver = false;
   });
  }
+
+//  function checking()
+//  {
+//   if(gameOver)
+//   {
+//     console.log(gameOver);
+//     document.body.addEventListener('click', () => { replay()});
+//   }
+//  }
+
+//  setInterval(checking(), 100);
+let gamingTestingNum = false;
+document.body.addEventListener('click', () => { 
+  if(gameOver && !gamingTestingNum)
+  {
+    gamingTestingNum = true;
+  }
+  else if(gameOver && gamingTestingNum)
+  {
+    console.log(gameOver);
+    replay();
+    gamingTestingNum = false;
+  }
+});
